@@ -47,6 +47,7 @@ export async function saveValentine(_: any, formData: FormData) {
     });
     return { success: true, slug: data.slug };
   } catch (error) {
+    // Keep this error log as it's useful for debugging Redis issues
     console.error("Redis error:", error);
     return { error: "Failed to save valentine" };
   }

@@ -27,7 +27,7 @@ export default function VideoPlayer({
           setIsPlaying(true);
           setHasStarted(true);
         } catch (error) {
-          // If autoplay fails (common on mobile), show a play button
+          // Keep this error log as it's useful for debugging mobile video issues
           console.error("Video play failed:", error);
           setIsPlaying(false);
           setHasStarted(false);
@@ -47,13 +47,11 @@ export default function VideoPlayer({
   };
 
   const handleStop = async () => {
-    console.log("Stop button clicked");
     if (videoRef.current) {
       await videoRef.current.pause();
       videoRef.current.currentTime = 0;
       setIsPlaying(false);
       setHasStarted(false);
-      console.log("Calling onComplete");
       onComplete();
     }
   };
@@ -88,11 +86,6 @@ export default function VideoPlayer({
         <source
           src={src}
           type="video/mp4"
-        />
-        <track
-          kind="captions"
-          src="/captions.vtt"
-          label="English"
         />
         Your browser does not support the video tag.
       </video>

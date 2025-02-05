@@ -81,11 +81,6 @@ export default function PrankVideo({ onComplete }: PrankVideoProps) {
           src="/videoplayback.mp4"
           type="video/mp4"
         />
-        <track
-          kind="captions"
-          src="/captions.vtt"
-          label="English"
-        />
         Your browser does not support the video tag.
       </video>
 
