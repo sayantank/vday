@@ -100,6 +100,7 @@ export default function Home() {
                   onClick={(e) => e.currentTarget.select()}
                 />
                 <button
+                  type="button"
                   onClick={() =>
                     navigator.clipboard.writeText(`${window.location.origin}/${state.slug}`)
                   }
