@@ -4,7 +4,6 @@ import VideoPlayer from "./VideoPlayer";
 import PrankVideo from "./PrankVideo";
 
 export type VDayProps = {
-  for: "him" | "her";
   to: string;
   from: string;
   message: string;
