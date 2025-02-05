@@ -75,6 +75,7 @@ export default function PrankVideo({ onComplete }: PrankVideoProps) {
         ref={videoRef}
         loop={isPlaying}
         className="w-full h-full object-cover"
+        playsInline
       >
         <source
           src="/videoplayback.mp4"

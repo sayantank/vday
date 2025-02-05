@@ -80,6 +80,7 @@ export default function VideoPlayer({
         loop={isPlaying && (loop || !autoPlay)}
         className="w-full h-full object-cover"
         onEnded={handleVideoEnd}
+        playsInline
       >
         <source
           src={src}
