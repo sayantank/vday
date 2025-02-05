@@ -50,7 +50,7 @@ export default function PrankVideo({ onComplete }: PrankVideoProps) {
       case 2:
         return "top-1/4 right-10";
       case 3:
-        return "bottom-20 left-10";
+        return "bottom-20 left-40";
       default:
         return "top-1/2 left-1/2";
     }
@@ -59,13 +59,13 @@ export default function PrankVideo({ onComplete }: PrankVideoProps) {
   const getButtonText = (stage: number) => {
     switch (stage) {
       case 1:
-        return "Please Stop 🥺";
+        return "stop";
       case 2:
-        return "Stop fr fr";
+        return "please stop 🙏🏽";
       case 3:
-        return "OMG STOP!!";
+        return "OMG STOP!!!!!!";
       default:
-        return "Play Video";
+        return "what is this?";
     }
   };
 
@@ -93,9 +93,9 @@ export default function PrankVideo({ onComplete }: PrankVideoProps) {
           type="button"
           onClick={handleStart}
           className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 
-                             bg-white px-4 py-2 rounded-lg shadow-lg hover:bg-gray-100 z-10"
+                     bg-white text-black px-4 py-2 shadow-lg hover:bg-gray-50 z-10 font-semibold"
         >
-          Play Video
+          what is this?
         </button>
       )}
 
@@ -104,8 +104,8 @@ export default function PrankVideo({ onComplete }: PrankVideoProps) {
           type="button"
           onClick={prankStage === 3 ? handleFinalStop : handlePrankButton}
           className={`absolute ${getButtonPosition(prankStage)} transform -translate-x-1/2 -translate-y-1/2 
-                             bg-white px-4 py-2 rounded-lg shadow-lg hover:bg-gray-100 z-10
-                             transition-all duration-300`}
+                     bg-white text-black px-4 py-2 shadow-lg hover:bg-gray-50 z-10 font-semibold
+                     transition-all duration-300`}
         >
           {getButtonText(prankStage)}
         </button>

@@ -11,10 +11,14 @@ export type VDayProps = {
 };
 
 export default function VDay(props: VDayProps) {
-  const [stage, setStage] = useState<"first-video" | "second-video" | "message">("first-video");
+  const [stage, setStage] = useState<"first-video" | "second-video" | "message" | "final-video">(
+    "first-video",
+  );
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
+  const [showValentineQuestion, setShowValentineQuestion] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const pleaseAudioRef = useRef<HTMLAudioElement | null>(null);
 
   // Handle audio for message stage
   useEffect(() => {
@@ -57,6 +61,18 @@ export default function VDay(props: VDayProps) {
     handleTransition("message");
   };
 
+  const handleValentineButtonClick = () => {
+    setShowValentineQuestion(true);
+    // Play the please sound
+    pleaseAudioRef.current = new Audio("/please.mp3");
+    pleaseAudioRef.current.volume = isMuted ? 0 : 1;
+    pleaseAudioRef.current.play();
+  };
+
+  const handleValentineResponse = () => {
+    handleTransition("final-video");
+  };
+
   return (
     <div className="fixed inset-0 w-full h-full">
       <div
@@ -78,20 +94,57 @@ export default function VDay(props: VDayProps) {
           <div className="h-screen flex items-center justify-center bg-pink-100 relative overflow-hidden">
             <button
               onClick={handleMuteToggle}
-              className="absolute top-4 right-4 text-pink-400 opacity-50 hover:opacity-100 transition-opacity z-20 text-sm"
+              className="absolute top-4 right-4 text-pink-400 opacity-50 hover:opacity-100 transition-opacity z-20 text-sm font-semibold"
             >
               {isMuted ? "🔇" : "🔊"}
             </button>
             <div className="text-center p-8 text-pink-700 relative z-10">
-              <img
-                src="/cat-rose.gif"
-                alt="Cat with rose"
-                className="w-48 h-48 object-contain mx-auto mb-8"
-              />
-              <h1 className="text-2xl mb-4 text-pink-800">Dear {props.to}</h1>
-              <p className="mb-4">{props.message}</p>
-              <p className="text-lg text-pink-600">Love, {props.from}</p>
+              {showValentineQuestion ? (
+                <>
+                  <img
+                    src="/cat-please.gif"
+                    alt="Pleading cat"
+                    className="w-64 h-64 object-contain mx-auto mb-8"
+                  />
+                  <h1 className="text-4xl font-semibold text-pink-600 text-center px-4 mb-8">
+                    Will u be my Valentine???
+                  </h1>
+                  <div className="flex gap-4 justify-center">
+                    <button
+                      onClick={handleValentineResponse}
+                      className="bg-pink-500 hover:bg-pink-600 text-white px-8 py-3 shadow-lg transition-all hover:scale-105 font-semibold"
+                    >
+                      YES!!
+                    </button>
+                    <button
+                      onClick={handleValentineResponse}
+                      className="bg-pink-500 hover:bg-pink-600 text-white px-8 py-3 shadow-lg transition-all hover:scale-105 font-semibold"
+                    >
+                      (opposite of no)
+                    </button>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <img
+                    src="/cat-rose.gif"
+                    alt="Cat with rose"
+                    className="w-48 h-48 object-contain mx-auto mb-8"
+                  />
+                  <h1 className="text-2xl mb-4 text-pink-800 font-semibold">Dear {props.to}</h1>
+                  <p className="mb-4 font-semibold text-xl">{props.message}</p>
+                  <p className="text-2xl text-pink-600 font-semibold">Love, {props.from}</p>
+                </>
+              )}
             </div>
+            {!showValentineQuestion && (
+              <button
+                onClick={handleValentineButtonClick}
+                className="absolute bottom-8 left-1/2 -translate-x-1/2 bg-red-500 hover:bg-red-600 text-white px-6 py-3 shadow-lg transition-all hover:scale-105 z-20 font-semibold "
+              >
+                DO NOT PRESS
+              </button>
+            )}
             <div className="absolute inset-0 pointer-events-none">
               {[...Array(30)].map((_, i) => (
                 <div
@@ -109,6 +162,23 @@ export default function VDay(props: VDayProps) {
                 </div>
               ))}
             </div>
+          </div>
+        )}
+
+        {stage === "final-video" && (
+          <div className="relative w-full h-full">
+            <VideoPlayer
+              src="/hapi.mp4"
+              onComplete={() => {}}
+              autoPlay
+              loop
+            />
+            <button
+              onClick={() => handleTransition("first-video")}
+              className="absolute bottom-8 left-1/2 -translate-x-1/2 bg-white text-black px-6 py-3 shadow-lg transition-all hover:scale-105 z-20 font-semibold"
+            >
+              start over hehe
+            </button>
           </div>
         )}
       </div>

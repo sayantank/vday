@@ -5,9 +5,15 @@ type VideoPlayerProps = {
   src: string;
   onComplete: () => void;
   autoPlay?: boolean;
+  loop?: boolean;
 };
 
-export default function VideoPlayer({ src, onComplete, autoPlay = false }: VideoPlayerProps) {
+export default function VideoPlayer({
+  src,
+  onComplete,
+  autoPlay = false,
+  loop = false,
+}: VideoPlayerProps) {
   const [isPlaying, setIsPlaying] = useState(autoPlay);
   const [hasStarted, setHasStarted] = useState(autoPlay);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -50,8 +56,7 @@ export default function VideoPlayer({ src, onComplete, autoPlay = false }: Video
   };
 
   const handleVideoEnd = () => {
-    if (autoPlay) {
-      // Only auto-complete for second video
+    if (autoPlay && !loop) {
       setIsPlaying(false);
       setHasStarted(false);
       onComplete();
@@ -72,7 +77,7 @@ export default function VideoPlayer({ src, onComplete, autoPlay = false }: Video
     <div className="w-full h-full relative">
       <video
         ref={videoRef}
-        loop={isPlaying && !autoPlay}
+        loop={isPlaying && (loop || !autoPlay)}
         className="w-full h-full object-cover"
         onEnded={handleVideoEnd}
       >
