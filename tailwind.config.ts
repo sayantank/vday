@@ -1,6 +1,6 @@
 import type { Config } from "tailwindcss";
 
-export default {
+const config: Config = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -12,7 +12,19 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      keyframes: {
+        float: {
+          "0%": { transform: "translateY(0) scale(1)", opacity: "0" },
+          "10%": { opacity: "1" },
+          "100%": { transform: "translateY(-80vh) scale(1)", opacity: "0" },
+        },
+      },
+      animation: {
+        float: "float linear infinite",
+      },
     },
   },
   plugins: [],
-} satisfies Config;
+};
+
+export default config;
