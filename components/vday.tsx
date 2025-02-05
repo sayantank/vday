@@ -131,7 +131,7 @@ export default function VDay(props: VDayProps) {
                     className="w-48 h-48 object-contain mx-auto mb-8"
                   />
                   <h1 className="text-2xl mb-4 text-pink-800 font-semibold">Dear {props.to}</h1>
-                  <p className="mb-4 font-semibold text-xl">{props.message}</p>
+                  <p className="mb-4 font-semibold text-xl max-w-2xl">{props.message}</p>
                   <p className="text-2xl text-pink-600 font-semibold">Love, {props.from}</p>
                 </>
               )}
