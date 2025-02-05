@@ -46,10 +46,23 @@ export default function VDay(props: VDayProps) {
 
   const handleTransition = (nextStage: typeof stage) => {
     setIsTransitioning(true);
+    // Reset all states when going back to first video
+    if (nextStage === "first-video") {
+      setShowValentineQuestion(false);
+      setIsMuted(false);
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current = null;
+      }
+      if (pleaseAudioRef.current) {
+        pleaseAudioRef.current.pause();
+        pleaseAudioRef.current = null;
+      }
+    }
     setTimeout(() => {
       setStage(nextStage);
       setIsTransitioning(false);
-    }, 500); // Half second delay for fade effect
+    }, 500);
   };
 
   const handleFirstVideoComplete = () => {

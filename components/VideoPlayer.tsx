@@ -27,7 +27,10 @@ export default function VideoPlayer({
           setIsPlaying(true);
           setHasStarted(true);
         } catch (error) {
+          // If autoplay fails (common on mobile), show a play button
           console.error("Video play failed:", error);
+          setIsPlaying(false);
+          setHasStarted(false);
         }
       }
     };
