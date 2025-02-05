@@ -73,7 +73,7 @@ export default function VDay(props: VDayProps) {
   };
 
   return (
-    <div className="fixed inset-0 w-full h-full">
+    <div className="fixed inset-0 w-full h-dvh">
       <div
         className={`w-full h-full transition-opacity duration-500 ${
           isTransitioning ? "opacity-0" : "opacity-100"
@@ -90,7 +90,7 @@ export default function VDay(props: VDayProps) {
         )}
 
         {stage === "message" && (
-          <div className="h-screen flex items-center justify-center bg-pink-100 relative overflow-hidden">
+          <div className="h-dvh flex items-center justify-center bg-pink-100 relative overflow-hidden">
             <button
               onClick={handleMuteToggle}
               className="absolute top-4 right-4 text-pink-400 opacity-50 hover:opacity-100 transition-opacity z-20 text-sm font-semibold"

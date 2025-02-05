@@ -7,7 +7,7 @@ export default function Home() {
   const [state, formAction] = useActionState(saveValentine, null);
 
   return (
-    <main className="min-h-screen p-8 bg-pink-50">
+    <main className="min-h-dvh p-8 bg-pink-50">
       <div className="max-w-md mx-auto">
         <h1 className="text-3xl font-semibold text-pink-600 mb-8 text-center">
           make your valentine card

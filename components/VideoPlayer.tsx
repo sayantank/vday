@@ -74,7 +74,7 @@ export default function VideoPlayer({
   }, []);
 
   return (
-    <div className="w-full h-full relative">
+    <div className="w-full h-dvh relative">
       <video
         ref={videoRef}
         loop={isPlaying && (loop || !autoPlay)}
