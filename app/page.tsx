@@ -34,6 +34,9 @@ export default function Home() {
               title="Only lowercase letters, numbers, and hyphens allowed"
               className="w-full p-2 border border-pink-200 bg-white shadow-sm font-semibold text-pink-700"
             />
+            <small className="text-pink-400 text-sm font-semibold">
+              only lowercase letters, numbers, and hyphens allowed
+            </small>
           </div>
 
           <div>
