@@ -28,6 +28,7 @@ export async function saveValentine(_: any, formData: FormData) {
   });
 
   if (!validatedFields.success) {
+    console.error("Failed to save valentine", validatedFields.error);
     return { error: "Failed to save valentine" };
   }
 
