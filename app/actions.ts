@@ -9,14 +9,14 @@ const redis = new Redis({
 });
 
 const formSchema = z.object({
-  to: z.string().min(1, "Recipient name is required"),
-  from: z.string().min(1, "Your name is required"),
-  message: z.string().min(1, "Message is required").max(500, "Message is too long"),
+  to: z.string().min(1, "recipient name is required"),
+  from: z.string().min(1, "your name is required"),
+  message: z.string().min(1, "message is required").max(500, "Message is too long"),
   slug: z
     .string()
-    .min(1, "URL is required")
-    .max(16, "URL must be 16 characters or less")
-    .regex(/^[a-z0-9-]+$/, "URL can only contain lowercase letters, numbers, and hyphens"),
+    .min(1, "card name is required")
+    .max(16, "cardname must be 16 characters or less")
+    .regex(/^[a-z0-9-]+$/, "card name can only contain lowercase letters, numbers, and hyphens"),
 });
 
 export async function saveValentine(_: any, formData: FormData) {
@@ -29,7 +29,7 @@ export async function saveValentine(_: any, formData: FormData) {
 
   if (!validatedFields.success) {
     console.error("Failed to save valentine", validatedFields.error);
-    return { error: "Failed to save valentine" };
+    return { error: validatedFields.error.errors[0].message };
   }
 
   const { data } = validatedFields;

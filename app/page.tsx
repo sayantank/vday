@@ -120,7 +120,7 @@ export default function Home() {
           </button>
         </form>
       </div>
-      <p className="text-pink-400 text-base font-semibold text-center fixed bottom-4 left-1/2 -translate-x-1/2">
+      <p className="text-pink-400 text-base font-semibold text-center my-6">
         something by{" "}
         <Link
           href="https://x.com/sayantanxyz"
